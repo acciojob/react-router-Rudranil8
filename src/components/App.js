@@ -12,59 +12,50 @@
 
 // export default App
 
-
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import './../styles/App.css';
+import { BrowserRouter,Link, Route, Routes } from "react-router-dom";
 
-const items = [
-  { id: "1", name: "Item One", description: "This is the first item." },
-  { id: "2", name: "Item Two", description: "This is the second item." },
-  { id: "3", name: "Item Three", description: "This is the third item." }
-];
-
-const ItemList = () => {
+const Header = () => {
   return (
-    <div>
-      <h1>Item List</h1>
+    <header>
       <ul>
-        {items.map((item) => (
-          <li key={item.id}>
-            <Link to={`/item/${item.id}`}>{item.name}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+       <li> <Link to="/">Home</Link></li>
+      <li><Link to="/about">About</Link> </li>
+    </ul>
+    </header>
   );
 };
 
-const ItemDetail = () => {
-  const { id } = useParams();
-  const item = items.find((item) => item.id === id);
 
-  if (!item) return <h2>Item not found</h2>;
-
+const Home = () => {
+  return (
+    <h1>
+     Welcome to my website!
+    </h1>  
+  );
+};
+const About = () => {
   return (
     <div>
-      <h1>{item.name}</h1>
-      <p>{item.description}</p>
-      <Link to="/">Back to List</Link>
+    <h1>
+     About
+    </h1>
+    <p>This is a sample React Router program.</p>
     </div>
   );
 };
 
 const App = () => {
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<ItemList />} />
-          <Route path="/item/:id" element={<ItemDetail />} />
-        </Routes>
-      </div>
-    </Router>
-  );
-};
+   <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
 
-export default App;
+export default App
